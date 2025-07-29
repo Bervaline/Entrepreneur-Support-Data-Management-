@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { isLoggedIn } from '../utils/auth';
 
 const Home = () => (
   <div className="flex flex-col items-center justify-center min-h-screen bg-base-200 p-8">
@@ -21,7 +22,12 @@ const Home = () => (
       <p className="mb-6 text-lg">
         <span className="font-semibold">Ready to take your business to the next level?</span> Apply now to become part of the HEVA network. Once your application is approved by our admin team, your business will be featured on our platform, giving you visibility and access to support and funding.
       </p>
-      <Link to="/apply" className="btn btn-primary btn-lg mt-4">Apply as an Entrepreneur</Link>
+      {!isLoggedIn() && (
+        <Link to="/apply" className="btn btn-primary btn-lg mt-4">Apply as an Entrepreneur</Link>
+      )}
+      {isLoggedIn() && (
+        <Link to="/dashboard" className="btn btn-primary btn-lg mt-4">Go to Dashboard</Link>
+      )}
     </div>
   </div>
 );
